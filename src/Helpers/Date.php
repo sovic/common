@@ -1,6 +1,6 @@
 <?php
 
-namespace Sovic\Common\Twig;
+namespace Sovic\Common\Helpers;
 
 use DateTime;
 use IntlDateFormatter;
