@@ -7,15 +7,15 @@ use JetBrains\PhpStorm\NoReturn;
 
 trait DownloadTrait
 {
+    /**
+     * @param resource $stream
+     */
     #[NoReturn]
-    public function download(string $path, string $fileName): void
+    public function download($stream, string $fileName, ?int $fileSize = null): void
     {
-        if (!file_exists($path)) {
-            throw new InvalidArgumentException('File not found');
+        if (!is_resource($stream)) {
+            throw new InvalidArgumentException('Invalid source');
         }
-
-        $stream = fopen($path, 'rb');
-        $fileSize = filesize($path);
 
         header('Pragma: public');
         header('Expires: -1');
@@ -23,10 +23,24 @@ trait DownloadTrait
         header('Content-Transfer-Encoding: binary');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Content-Length: ' . $fileSize);
+        if ($fileSize) {
+            header('Content-Length: ' . $fileSize);
+        }
         header('Accept-Ranges: bytes');
         fpassthru($stream);
 
         exit;
+    }
+
+    public function downloadFile(string $path, string $fileName): void
+    {
+        if (!file_exists($path)) {
+            throw new InvalidArgumentException('File not found');
+        }
+
+        $fileSize = filesize($path);
+        $stream = fopen($path, 'rb');
+
+        $this->download($stream, $fileName, $fileSize);
     }
 }
