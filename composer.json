@@ -29,8 +29,8 @@
         "ext-intl": "*",
         "doctrine/orm": "^2.19",
         "doctrine/dbal": "^3.8",
-        "symfony/twig-bundle": "^7.0",
-        "symfony/twig-bridge": "^7.0",
-        "symfony/validator": "^7.0"
+        "symfony/twig-bundle": "^6.4",
+        "symfony/twig-bridge": "^6.4",
+        "symfony/validator": "^6.4"
     }
 }
