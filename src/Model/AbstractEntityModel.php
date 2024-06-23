@@ -27,7 +27,7 @@ abstract class AbstractEntityModel
         $this->translator = $translator;
     }
 
-    protected function flush(): void
+    public function flush(): void
     {
         $this->entityManager->persist($this->entity);
         $this->entityManager->flush();
