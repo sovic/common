@@ -18,6 +18,7 @@ class DateExtension extends AbstractExtension
             new TwigFilter('formatDateTime', $this->formatDateTime(...)),
             new TwigFilter('formatDateShortMonth', $this->formatDateShortMonth(...)),
             new TwigFilter('formatDateMonthName', $this->formatDateMonthName(...)),
+            new TwigFilter('formatReadableDate', $this->formatReadableDate(...)),
         ];
     }
 
@@ -39,6 +40,15 @@ class DateExtension extends AbstractExtension
     public function formatDateMonthName(?DateTimeInterface $date): string
     {
         return $this->format($date, 'LLLL');
+    }
+
+    public function formatReadableDate(?DateTimeInterface $date, bool $includeDayName = false): string
+    {
+        if ($includeDayName) {
+            return $this->format($date, 'EEEE d. MMMM y');
+        }
+
+        return $this->format($date, 'd. MMMM y');
     }
 
     private function format(?DateTimeInterface $date, string $format): string
