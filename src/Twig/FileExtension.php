@@ -2,9 +2,10 @@
 
 namespace Sovic\Common\Twig;
 
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class FileExtension
+class FileExtension extends AbstractExtension
 {
     public function getFilters(): array
     {
