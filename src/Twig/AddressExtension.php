@@ -11,8 +11,8 @@ class AddressExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('formatStreet', $this->formatStreet(...)),
-            new TwigFilter('formatCity', $this->formatCity(...)),
+            new TwigFilter('format_street', $this->formatStreet(...)),
+            new TwigFilter('format_city', $this->formatCity(...)),
         ];
     }
 

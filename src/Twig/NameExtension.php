@@ -11,7 +11,7 @@ class NameExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('formatName', $this->formatName(...)),
+            new TwigFilter('format_name', $this->formatName(...)),
         ];
     }
 

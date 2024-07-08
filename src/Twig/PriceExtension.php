@@ -10,7 +10,7 @@ class PriceExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('formatPrice', $this->formatPrice(...)),
+            new TwigFilter('format_price', $this->formatPrice(...)),
         ];
     }
 

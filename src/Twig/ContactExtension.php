@@ -10,11 +10,11 @@ class ContactExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('formatContactEmail', $this->formatContactEmail(...)),
-            new TwigFilter('formatContactFacebook', $this->formatContactFacebook(...)),
-            new TwigFilter('formatContactPhone', $this->formatContactPhone(...)),
-            new TwigFilter('formatContactWeb', $this->formatContactWeb(...)),
-            new TwigFilter('fixUrlSchema', $this->fixUrlSchema(...)),
+            new TwigFilter('format_contact_email', $this->formatContactEmail(...)),
+            new TwigFilter('format_contact_facebook', $this->formatContactFacebook(...)),
+            new TwigFilter('format_contact_phone', $this->formatContactPhone(...)),
+            new TwigFilter('format_contact_web', $this->formatContactWeb(...)),
+            new TwigFilter('fix_url_schema', $this->fixUrlSchema(...)),
         ];
     }
 

@@ -10,8 +10,8 @@ class FileExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('formatDisplayFileName', $this->formatDisplayFileName(...)),
-            new TwigFilter('formatFileSizeReadable', $this->formatFileSizeReadable(...)),
+            new TwigFilter('format_display_file_name', $this->formatDisplayFileName(...)),
+            new TwigFilter('format_file_size_readable', $this->formatFileSizeReadable(...)),
         ];
     }
 
