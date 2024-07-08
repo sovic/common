@@ -14,6 +14,7 @@ class ContactExtension extends AbstractExtension
             new TwigFilter('formatContactFacebook', $this->formatContactFacebook(...)),
             new TwigFilter('formatContactPhone', $this->formatContactPhone(...)),
             new TwigFilter('formatContactWeb', $this->formatContactWeb(...)),
+            new TwigFilter('fixUrlSchema', $this->fixUrlSchema(...)),
         ];
     }
 
@@ -70,5 +71,15 @@ class ContactExtension extends AbstractExtension
         }
 
         return $return;
+    }
+
+    public function fixUrlSchema(string $url): string
+    {
+        /** @noinspection HttpUrlsUsage */
+        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://')) {
+            $url = 'https://' . $url;
+        }
+
+        return $url;
     }
 }
