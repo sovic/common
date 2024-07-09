@@ -46,7 +46,37 @@ class ContactExtension extends AbstractExtension
             return '';
         }
 
-        return '<a href="tel:' . $value . '">' . $value . '</a>';
+        $result = $this->parsePhoneNumber($value);
+
+        $label = $value;
+        $phone = $result['phone'];
+        if (mb_strlen($phone) === 9) {
+            $label = substr($result['phone'], 0, 3)
+                . ' ' . substr($result['phone'], 3, 3)
+                . ' ' . substr($result['phone'], 6, 3);
+        }
+        if ($result['code']) {
+            $label = $result['code'] . ' ' . $label;
+            $phone = $result['code'] . $phone;
+        }
+
+        return '<a href="tel:' . $phone . '">' . $label . '</a>';
+    }
+
+    private function parsePhoneNumber(string $phone): array
+    {
+        $code = null;
+        if (str_starts_with($phone, '+420')) {
+            $code = '+420';
+            $phone = substr($phone, 4);
+        }
+        if (str_starts_with($phone, '+421')) {
+            $code = '+421';
+            $phone = substr($phone, 4);
+        }
+        $phone = str_replace([' '], [''], $phone);
+
+        return compact('code', 'phone');
     }
 
     public function formatContactWeb(?string $value): string
