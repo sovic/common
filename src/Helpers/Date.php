@@ -22,11 +22,12 @@ class Date
                 'title' => $month . '-' . $year,
                 'active' => false,
             ];
-            if ($locale) {
-                $formatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::FULL);
-                $formatter->setPattern('LLLL y');
-                $res[$i]['title'] = $formatter->format($date);
-            }
+
+            $locale = $locale ?: '';
+            $formatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+            $formatter->setPattern('LLLL y');
+            $res[$i]['title'] = $formatter->format($date);
+
             $date->modify('-1 month');
         }
 
