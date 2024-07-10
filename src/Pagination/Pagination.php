@@ -6,6 +6,8 @@ use InvalidArgumentException;
 
 class Pagination
 {
+    private string $basePath = '';
+
     public function __construct(
         private int $total,
         private int $limitPerPage,
@@ -59,5 +61,15 @@ class Pagination
             throw new InvalidArgumentException('invalid page');
         }
         $this->currentPage = $currentPage;
+    }
+
+    public function getBasePath(): string
+    {
+        return $this->basePath;
+    }
+
+    public function setBasePath(string $basePath): void
+    {
+        $this->basePath = $basePath;
     }
 }
