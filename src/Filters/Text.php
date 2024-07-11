@@ -70,8 +70,12 @@ class Text
         }
 
         $search = array_merge($prepositions, $conjunctions);
+        if (empty($search)) {
+            return $text;
+        }
+
         $searchRegex = '/ ([' . implode('|', $search) . ']) /';
 
-        return preg_replace($searchRegex, ' $1&nbsp;', $text);
+        return (string) preg_replace($searchRegex, ' $1&nbsp;', $text);
     }
 }
