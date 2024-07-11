@@ -45,4 +45,33 @@ class Text
 
         return trim($cleanText);
     }
+
+    /** @noinspection SpellCheckingInspection */
+    public static function prettyText(string $text, ?string $locale = null): string
+    {
+        $prepositions = [];
+        $conjunctions = [];
+
+        switch ($locale) {
+            case 'cs':
+                $prepositions1 = ['k', 'o', 's', 'v', 'u', 'z'];
+                $prepositions2 = ['ve', 'na', 'od', 'do', 'ke', 'po', 'za', 'si'];
+                $prepositions3 = ['pro', 'bez', 'pod', 'nad', 'při'];
+                $prepositions4 = ['před', 'mezi', 'skrz'];
+                $prepositions = array_merge($prepositions1, $prepositions2, $prepositions3, $prepositions4);
+                $conjunctions = ['a', 'i', 'nebo', 'ani', 'ale', 'avšak', 'či', 'když', 'protože', 'aby', 'jestli'];
+                break;
+            case 'en':
+                $prepositions = ['a', 'an', 'the', 'at', 'by', 'for', 'in', 'of', 'on', 'to', 'up', 'and', 'but', 'or', 'nor'];
+                $conjunctions = ['as', 'after', 'although', 'because', 'before', 'if', 'since', 'though', 'unless', 'until', 'when', 'where', 'while'];
+                break;
+            default:
+                break;
+        }
+
+        $search = array_merge($prepositions, $conjunctions);
+        $searchRegex = '/ ([' . implode('|', $search) . ']) /';
+
+        return preg_replace($searchRegex, ' $1&nbsp;', $text);
+    }
 }
