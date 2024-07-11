@@ -71,11 +71,11 @@ class Text
 
         $search = array_merge($prepositions, $conjunctions);
         if (empty($search)) {
-            return $text;
+            return trim($text);
         }
 
         $searchRegex = '/ ([' . implode('|', $search) . ']) /';
 
-        return (string) preg_replace($searchRegex, ' $1&nbsp;', $text);
+        return trim((string) preg_replace($searchRegex, ' $1&nbsp;', $text));
     }
 }
