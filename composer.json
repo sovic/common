@@ -26,6 +26,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": "~8.2",
+        "ext-iconv": "*",
         "ext-intl": "*",
         "doctrine/orm": "^2.19",
         "doctrine/dbal": "^3.8",
