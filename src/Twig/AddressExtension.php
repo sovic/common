@@ -33,7 +33,7 @@ class AddressExtension extends AbstractExtension
         return $street;
     }
 
-    public function formatCity(?AddressEntityInterface $address): string
+    public function formatCity(?AddressEntityInterface $address, ?bool $html = true): string
     {
         if (!$address) {
             return '';
@@ -44,7 +44,11 @@ class AddressExtension extends AbstractExtension
             $city .= ' (' . $address->getCityPart() . ')';
         }
         if ($address->getZipCode() || $address->getCountry()) {
-            $city .= '<br>';
+            if ($html) {
+                $city .= '<br>';
+            } else {
+                $city .= ', ';
+            }
         }
         if ($address->getZipCode()) {
             $city .= $address->getZipCode();
