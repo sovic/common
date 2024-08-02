@@ -13,6 +13,7 @@ class AddressExtension extends AbstractExtension
         return [
             new TwigFilter('format_street', $this->formatStreet(...)),
             new TwigFilter('format_city', $this->formatCity(...)),
+            new TwigFilter('format_address', $this->formatAddress(...)),
         ];
     }
 
@@ -33,7 +34,7 @@ class AddressExtension extends AbstractExtension
         return $street;
     }
 
-    public function formatCity(?AddressEntityInterface $address, ?bool $html = true): string
+    public function formatCity(?AddressEntityInterface $address, bool $html = true): string
     {
         if (!$address) {
             return '';
@@ -51,7 +52,8 @@ class AddressExtension extends AbstractExtension
             }
         }
         if ($address->getZipCode()) {
-            $city .= $address->getZipCode();
+            $zipCode = $address->getZipCode();
+            $city .= substr($zipCode, 0, 3) . '&nbsp;' . substr($zipCode, 3, 2);
             if ($address->getCountry()) {
                 $city .= ', ' . $address->getCountry();
             }
@@ -60,5 +62,18 @@ class AddressExtension extends AbstractExtension
         }
 
         return $city;
+    }
+
+    public function formatAddress(?AddressEntityInterface $address, bool $html = true): string
+    {
+        if (!$address) {
+            return '';
+        }
+
+        $parts = [];
+        $parts[] = $this->formatStreet($address);
+        $parts[] = $this->formatCity($address, $html);
+
+        return implode($html ? '<br>' : ', ', $parts);
     }
 }
