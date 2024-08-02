@@ -30,6 +30,9 @@
         "ext-intl": "*",
         "doctrine/orm": "^2.19",
         "doctrine/dbal": "^3.8",
+        "sentry/sentry-symfony": "^5.0",
+        "symfony/framework-bundle": "^6.4|^7.0",
+        "symfony/routing": "^6.4|^7.0",
         "symfony/twig-bundle": "^6.4|^7.0",
         "symfony/twig-bridge": "^6.4|^7.0",
         "symfony/validator": "^6.4|^7.0"
