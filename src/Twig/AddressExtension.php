@@ -71,8 +71,13 @@ class AddressExtension extends AbstractExtension
         }
 
         $parts = [];
-        $parts[] = $this->formatStreet($address);
-        $parts[] = $this->formatCity($address, $html);
+        if ($html) {
+            $parts[] = '<span class="address-street">' . $this->formatStreet($address) . '</span>';
+            $parts[] = '<span class="address-city">' . $this->formatCity($address, $html) . '</span>';
+        } else {
+            $parts[] = $this->formatStreet($address);
+            $parts[] = $this->formatCity($address, $html);
+        }
 
         return implode($html ? '<br>' : ', ', $parts);
     }
