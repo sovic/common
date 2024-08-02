@@ -9,6 +9,7 @@ abstract class AbstractResultSet
 
     /** @var object[] */
     private array $indexedItems;
+    private int $total;
 
     public function __construct(array $items)
     {
@@ -45,9 +46,18 @@ abstract class AbstractResultSet
         $this->indexedItems[$item->getId()] = $item;
     }
 
-    public function getCount(): int
+    public function getTotalCount(): int
     {
-        return count($this->items);
+        if (!isset($this->total)) {
+            $this->total = count($this->items);
+        }
+
+        return $this->total;
+    }
+
+    public function setTotalCount(int $total): void
+    {
+        $this->total = $total;
     }
 
     public function getIndexedItems(): array
