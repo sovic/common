@@ -4,6 +4,7 @@ namespace Sovic\Common\Entity\Trait;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
+use Sovic\Common\Entity\Enum\CountryId;
 use Symfony\Component\Validator\Constraints\Length;
 
 trait AddressTrait
@@ -11,35 +12,35 @@ trait AddressTrait
     // address label
     #[Length(max: 255)]
     #[Column(type: 'string', length: 255, nullable: true, options: ['default' => null])]
-    public ?string $name = null;
+    private ?string $name = null;
 
     #[Length(max: 255)]
     #[Column(type: Types::STRING, length: 255, nullable: false)]
-    public string $street;
+    private string $street;
 
     #[Length(max: 50)]
     #[Column(name: 'descriptive_number', type: Types::STRING, length: 50, nullable: true, options: ['default' => null])]
-    public ?string $descriptiveNumber = null;
+    private ?string $descriptiveNumber = null;
 
     #[Length(max: 50)]
     #[Column(name: 'orientation_number', type: Types::STRING, length: 50, nullable: true, options: ['default' => null])]
-    public ?string $orientationNumber = null;
+    private ?string $orientationNumber = null;
 
     #[Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => null])]
-    public ?string $city = null;
+    private ?string $city = null;
 
     #[Column(name: 'city_part', type: Types::STRING, length: 255, nullable: true, options: ['default' => null])]
-    public ?string $cityPart = null;
+    private ?string $cityPart = null;
 
     #[Column(name: 'zip_code', type: Types::STRING, length: 50, nullable: true, options: ['default' => null])]
-    public ?string $zipCode = null;
+    private ?string $zipCode = null;
 
-    #[Column(type: Types::STRING, length: 50, nullable: true, options: ['default' => null])]
-    public ?string $country = null;
+    #[Column(type: Types::STRING, length: 50, nullable: true, enumType: CountryId::class, options: ['default' => null])]
+    private ?CountryId $country = null;
 
     #[Length(max: 50)]
     #[Column(name: 'identification_number', type: Types::STRING, length: 50, nullable: true, options: ['default' => null])]
-    public ?string $identificationNumber = null;
+    private ?string $identificationNumber = null;
 
     public function getName(): ?string
     {
@@ -111,12 +112,12 @@ trait AddressTrait
         $this->zipCode = $zipCode;
     }
 
-    public function getCountry(): ?string
+    public function getCountry(): ?CountryId
     {
         return $this->country;
     }
 
-    public function setCountry(?string $country): void
+    public function setCountry(?CountryId $country): void
     {
         $this->country = $country;
     }

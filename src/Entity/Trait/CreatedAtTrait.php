@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\Column;
 trait CreatedAtTrait
 {
     #[Column(name: "created_at", type: "datetime_immutable", nullable: false)]
-    protected DateTimeImmutable $createdAt;
+    private DateTimeImmutable $createdAt;
 
     public function __construct()
     {
