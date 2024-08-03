@@ -55,10 +55,10 @@ class AddressExtension extends AbstractExtension
             $zipCode = $address->getZipCode();
             $city .= substr($zipCode, 0, 3) . '&nbsp;' . substr($zipCode, 3, 2);
             if ($address->getCountry()) {
-                $city .= ', ' . $address->getCountry();
+                $city .= ', ' . $address->getCountry()->value;
             }
         } elseif ($address->getCountry()) {
-            $city .= $address->getCountry();
+            $city .= $address->getCountry()->value;
         }
 
         return $city;
