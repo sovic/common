@@ -2,6 +2,8 @@
 
 namespace Sovic\Common\Entity;
 
+use Sovic\Common\Entity\Enum\CountryId;
+
 interface AddressEntityInterface
 {
     public function getStreet(): ?string;
@@ -16,5 +18,5 @@ interface AddressEntityInterface
 
     public function getZipCode(): ?string;
 
-    public function getCountry(): ?string;
+    public function getCountry(): ?CountryId;
 }
