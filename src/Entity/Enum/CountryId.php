@@ -271,14 +271,37 @@ enum CountryId: string
         $name = trim($name);
 
         return match ($name) {
+            //
+            'ČR',
             'Česká republika',
             'Česko' => self::CZ,
+            //
+            'SK',
+            'SR',
             'Slovenská republika',
             'Slovensko' => self::SK,
-            'Polsko' => self::PL,
+            //
+            'D',
+            'Deutschland',
+            'NSR',
+            'Německá spolková republika',
+            'Spolková republika Německo',
+            'SRN',
             'Německo' => self::DE,
-            'Rakousko' => self::AT,
+            //
+            'Switzerland',
+            'Švýcarsko' => self::CH,
+            //
             'Maďarsko' => self::HU,
+            'Irsko' => self::IE,
+            'Itálie' => self::IT,
+            'Polsko' => self::PL,
+            'Rakousko' => self::AT,
+            'Španělsko' => self::ES,
+            'Švédsko' => self::SE,
+            'Ukrajina' => self::UA,
+            'Velká Británie' => self::GB,
+            'USA' => self::US,
             default => null,
         };
     }
