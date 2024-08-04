@@ -15,6 +15,9 @@ class CompanyIdentificationNumberValidator
         };
     }
 
+    /**
+     * https://phpfashion.com/cs/jak-overit-platne-ic-a-rodne-cislo
+     */
     private function validateCz(string $value): bool
     {
         // be liberal in what you receive

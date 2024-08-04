@@ -16,7 +16,11 @@ class PersonalIdentificationNumberValidator
         throw new InvalidArgumentException('Unsupported country ID');
     }
 
-    // CZ, SK rodné číslo
+    /**
+     * CZ, SK rodné číslo
+     *
+     * https://phpfashion.com/cs/jak-overit-platne-ic-a-rodne-cislo
+     */
     private function validateCzSk(string $value): bool
     {
         // be liberal in what you receive
