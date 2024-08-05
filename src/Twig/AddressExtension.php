@@ -28,7 +28,11 @@ class AddressExtension extends AbstractExtension
             $street .= ' ' . $address->getDescriptiveNumber();
         }
         if ($address->getOrientationNumber()) {
-            $street .= '/' . $address->getOrientationNumber();
+            if ($address->getDescriptiveNumber()) {
+                $street .= '/';
+            }
+
+            $street .= $address->getOrientationNumber();
         }
 
         return $street;
