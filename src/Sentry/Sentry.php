@@ -35,6 +35,8 @@ class Sentry
         $report = true;
         if ($hint && is_object($hint->exception)) {
             $className = $hint->exception ? get_class($hint->exception) : null;
+            $message = mb_strtolower($hint->exception->getMessage());
+
             if ($className === NotFoundHttpException::class) {
                 $message = mb_strtolower($hint->exception->getMessage());
                 foreach (self::$ignoreNotFoundPaths as $pathRegExp) {
@@ -54,6 +56,10 @@ class Sentry
 
                 // skip sentry logging
                 return null;
+            }
+
+            if (str_contains($message, 'highlight_file')) {
+                $report = false;
             }
 
             // optionally alert someone about admin access attempt?
