@@ -4,7 +4,7 @@ namespace Sovic\Common\Entity\Trait;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
-use Sovic\Common\Entity\Enum\CountryId;
+use Sovic\Common\Enum\CountryId;
 use Symfony\Component\Validator\Constraints\Length;
 
 trait AddressTrait

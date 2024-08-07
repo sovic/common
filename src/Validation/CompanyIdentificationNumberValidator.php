@@ -3,7 +3,7 @@
 namespace Sovic\Common\Validation;
 
 use InvalidArgumentException;
-use Sovic\Common\Entity\Enum\CountryId;
+use Sovic\Common\Enum\CountryId;
 
 class CompanyIdentificationNumberValidator
 {

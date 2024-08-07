@@ -2,7 +2,7 @@
 
 namespace Sovic\Common\Entity;
 
-use Sovic\Common\Entity\Enum\CountryId;
+use Sovic\Common\Enum\CountryId;
 
 interface AddressEntityInterface
 {
