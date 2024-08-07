@@ -2,7 +2,7 @@
 
 namespace Sovic\Common\Enum;
 
-enum CountryId: string
+enum CountryId: string implements SimpleTranslatableEnumInterface
 {
     case AF = 'AF'; // Afghanistan
     case AX = 'AX'; // Åland Islands
