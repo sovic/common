@@ -65,7 +65,7 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
             'limit' => $this->getLimit(),
             'page' => $this->getPage(),
             'search' => $this->getSearch() ?? '',
-            'visibility_id' => $this->getVisibilityId()->value,
+            'visibility' => $this->getVisibilityId()->value,
         ];
     }
 }
