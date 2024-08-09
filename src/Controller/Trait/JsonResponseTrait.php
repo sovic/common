@@ -25,7 +25,7 @@ trait JsonResponseTrait
     /**
      * Implement https://github.com/omniti-labs/jsend
      */
-    protected function sendFail(int $code = 500): JsonResponse
+    protected function sendFail(int $code = 400): JsonResponse
     {
         return $this->json([
             'status' => 'fail',
@@ -36,7 +36,7 @@ trait JsonResponseTrait
     /**
      * Implement https://github.com/omniti-labs/jsend
      */
-    protected function sendError(string $errorMessage, int $code = 400): JsonResponse
+    protected function sendError(string $errorMessage, int $code = 500): JsonResponse
     {
         return $this->json([
             'status' => 'error',
