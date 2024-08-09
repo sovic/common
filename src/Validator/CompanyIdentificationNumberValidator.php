@@ -1,6 +1,6 @@
 <?php
 
-namespace Sovic\Common\Validation;
+namespace Sovic\Common\Validator;
 
 use InvalidArgumentException;
 use Sovic\Common\Enum\CountryId;

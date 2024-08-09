@@ -1,6 +1,6 @@
 <?php
 
-namespace Sovic\Common\Validation;
+namespace Sovic\Common\Validator;
 
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
