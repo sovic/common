@@ -46,7 +46,6 @@ class Text
         return trim($cleanText);
     }
 
-    /** @noinspection SpellCheckingInspection */
     public static function prettyText(string $text, ?string $locale = null): string
     {
         $prepositions = [];
