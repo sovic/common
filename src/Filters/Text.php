@@ -88,4 +88,29 @@ class Text
 
         return iconv(mb_detect_encoding($value, mb_detect_order(), false), 'UTF-8//IGNORE', $value);
     }
+
+    public static function filterNameCase(string $value, int $case = MB_CASE_TITLE): ?string
+    {
+        $value = trim($value);
+
+        return mb_convert_case($value, $case, "UTF-8");
+    }
+
+    public static function removeSpaces(?string $value): ?string
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return trim(preg_replace("/\s+/", '', $value));
+    }
+
+    public static function removeMultipleSpaces(?string $value): ?string
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return trim(preg_replace("/\s+/", ' ', $value));
+    }
 }
