@@ -3,6 +3,7 @@
 namespace Sovic\Common\Twig;
 
 use Sovic\Common\Entity\NameEntityInterface;
+use Sovic\Common\Helpers\Name;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -21,15 +22,6 @@ class NameExtension extends AbstractExtension
             return '';
         }
 
-        $name = $entity->getName() . ' ' . $entity->getSurname();
-
-        if ($entity->getTitleBefore()) {
-            $name = $entity->getTitleBefore() . ' ' . $name;
-        }
-        if ($entity->getTitleAfter()) {
-            $name .= ', ' . $entity->getTitleAfter();
-        }
-
-        return $name;
+        return Name::formatName($entity);
     }
 }
