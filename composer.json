@@ -28,6 +28,7 @@
         "php": "~8.2",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "ext-mbstring": "*",
         "doctrine/orm": "^2.19",
         "doctrine/dbal": "^3.8",
         "sentry/sentry-symfony": "^5.0",
