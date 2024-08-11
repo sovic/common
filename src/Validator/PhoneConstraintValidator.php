@@ -35,10 +35,16 @@ class PhoneConstraintValidator extends ConstraintValidator
 
         $phoneUtil = PhoneNumberUtil::getInstance();
         try {
-            $phoneUtil->parse($phone, $country);
+            $phoneNumber = $phoneUtil->parse($phone, $country);
+
+            if (!$phoneNumber || !$phoneUtil->isValidNumber($phoneNumber)) {
+                $this->context->buildViolation($constraint->message)
+                    ->setParameter('{{ string }}', $phone)
+                    ->addViolation();
+            }
         } catch (NumberParseException) {
             $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ string }}', $value)
+                ->setParameter('{{ string }}', $phone)
                 ->addViolation();
         }
     }
