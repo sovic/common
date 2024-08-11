@@ -37,6 +37,11 @@ abstract class AbstractEntityModel
         $this->translator = $translator;
     }
 
+    public function getTranslator(): TranslatorInterface
+    {
+        return $this->translator;
+    }
+
     public function flush(): void
     {
         $this->entityManager->persist($this->entity);
