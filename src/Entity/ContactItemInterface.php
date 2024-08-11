@@ -12,5 +12,7 @@ interface ContactItemInterface
 
     public function getValue(): string;
 
+    public function setValue(string $value): void;
+
     public function getNote(): ?string;
 }
