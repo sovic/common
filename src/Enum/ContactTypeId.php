@@ -36,9 +36,9 @@ enum ContactTypeId: string implements SimpleTranslatableEnumInterface
     {
         return match ($this) {
             self::Email, self::Fax, self::Web, self::Phone => ['*'],
-            self::Facebook => ['facebook.com'],
-            self::Instagram => ['instagram.com'],
-            self::Threads => ['threads.net'],
+            self::Facebook => ['www.facebook.com', 'facebook.com'],
+            self::Instagram => ['www.instagram.com', 'instagram.com'],
+            self::Threads => ['www.threads.net', 'threads.net'],
         };
     }
 }
