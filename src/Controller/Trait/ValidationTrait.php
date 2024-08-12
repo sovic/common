@@ -49,7 +49,12 @@ trait ValidationTrait
             }
         }
 
-        if ($contact->getTypeId() === ContactTypeId::Web) {
+        if (
+            $contact->getTypeId() === ContactTypeId::Web ||
+            $contact->getTypeId() === ContactTypeId::Facebook ||
+            $contact->getTypeId() === ContactTypeId::Instagram ||
+            $contact->getTypeId() === ContactTypeId::Threads
+        ) {
             if (str_starts_with($contact->getValue(), 'www.')) {
                 $contact->setValue('https://' . $contact->getValue());
             }
@@ -61,6 +66,18 @@ trait ValidationTrait
             /** @noinspection HttpUrlsUsage */
             if (str_starts_with($contact->getValue(), 'http://')) {
                 $errors[] = 'HTTP protokol již není povolen';
+            }
+        }
+
+        if (
+            $contact->getTypeId() === ContactTypeId::Facebook ||
+            $contact->getTypeId() === ContactTypeId::Instagram ||
+            $contact->getTypeId() === ContactTypeId::Threads
+        ) {
+            $allowedDomains = $contact->getTypeId()->allowedDomains();
+            $domain = parse_url($contact->getValue(), PHP_URL_HOST);
+            if ($domain && !in_array($domain, $allowedDomains, true)) {
+                $errors[] = 'Neplatná doména';
             }
         }
 

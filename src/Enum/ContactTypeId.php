@@ -31,4 +31,14 @@ enum ContactTypeId: string implements SimpleTranslatableEnumInterface
             self::Threads => 'Threads',
         };
     }
+
+    public function allowedDomains(): array
+    {
+        return match ($this) {
+            self::Email, self::Fax, self::Web, self::Phone => ['*'],
+            self::Facebook => ['facebook.com'],
+            self::Instagram => ['instagram.com'],
+            self::Threads => ['threads.com'],
+        };
+    }
 }
