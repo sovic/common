@@ -38,7 +38,7 @@ enum ContactTypeId: string implements SimpleTranslatableEnumInterface
             self::Email, self::Fax, self::Web, self::Phone => ['*'],
             self::Facebook => ['facebook.com'],
             self::Instagram => ['instagram.com'],
-            self::Threads => ['threads.com'],
+            self::Threads => ['threads.net'],
         };
     }
 }
