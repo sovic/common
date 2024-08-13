@@ -12,6 +12,8 @@ class ContactExtension extends AbstractExtension
         return [
             new TwigFilter('format_contact_email', $this->formatContactEmail(...)),
             new TwigFilter('format_contact_facebook', $this->formatContactFacebook(...)),
+            new TwigFilter('format_contact_instagram', $this->formatContactInstagram(...)),
+            new TwigFilter('format_contact_threads', $this->formatContactThreads(...)),
             new TwigFilter('format_contact_phone', $this->formatContactPhone(...)),
             new TwigFilter('format_contact_web', $this->formatContactWeb(...)),
             new TwigFilter('fix_url_schema', $this->fixUrlSchema(...)),
@@ -33,6 +35,34 @@ class ContactExtension extends AbstractExtension
             return '';
         }
         $url = $value;
+
+        return '
+            <a href="' . $url . '" target="_blank">' . $value . '</a>
+            <i class="bi bi-arrow-up-right-square"></i>
+        ';
+    }
+
+    public function formatContactInstagram(?string $value): string
+    {
+        if (!$value) {
+            return '';
+        }
+        $url = $value;
+        $value = preg_replace('/^@/', '', $value);
+
+        return '
+            <a href="' . $url . '" target="_blank">' . $value . '</a>
+            <i class="bi bi-arrow-up-right-square"></i>
+        ';
+    }
+
+    public function formatContactThreads(?string $value): string
+    {
+        if (!$value) {
+            return '';
+        }
+        $url = $value;
+        $value = preg_replace('/^@/', '', $value);
 
         return '
             <a href="' . $url . '" target="_blank">' . $value . '</a>
