@@ -57,7 +57,7 @@ abstract class AbstractEntityModel
 
     public function flush(): void
     {
-        if ($this->operator && $this->entity instanceof LoggableEntityInterface) {
+        if (isset($this->operator) && $this->entity instanceof LoggableEntityInterface) {
             $this->entity->setOperator($this->operator);
         }
 
@@ -67,7 +67,7 @@ abstract class AbstractEntityModel
 
     public function remove(): void
     {
-        if ($this->operator && $this->entity instanceof LoggableEntityInterface) {
+        if (isset($this->operator) && $this->entity instanceof LoggableEntityInterface) {
             $this->entity->setOperator($this->operator);
         }
 
