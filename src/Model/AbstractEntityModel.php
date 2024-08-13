@@ -3,12 +3,14 @@
 namespace Sovic\Common\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sovic\Common\Entity\LoggableEntityInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractEntityModel
 {
     protected EntityManagerInterface $entityManager;
     protected TranslatorInterface $translator;
+    protected mixed $operator;
 
     public mixed $entity;
 
@@ -42,14 +44,33 @@ abstract class AbstractEntityModel
         return $this->translator;
     }
 
+
+    public function getOperator(): mixed
+    {
+        return $this->operator;
+    }
+
+    public function setOperator(mixed $operator): void
+    {
+        $this->operator = $operator;
+    }
+
     public function flush(): void
     {
+        if ($this->operator && $this->entity instanceof LoggableEntityInterface) {
+            $this->entity->setOperator($this->operator);
+        }
+
         $this->entityManager->persist($this->entity);
         $this->entityManager->flush();
     }
 
     public function remove(): void
     {
+        if ($this->operator && $this->entity instanceof LoggableEntityInterface) {
+            $this->entity->setOperator($this->operator);
+        }
+
         $this->entityManager->remove($this->entity);
         $this->entityManager->flush();
     }
