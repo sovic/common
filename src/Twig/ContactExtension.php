@@ -48,7 +48,7 @@ class ContactExtension extends AbstractExtension
             return '';
         }
         $url = $value;
-        $value = preg_replace('/^@/', '', $value);
+        $value = preg_replace('/.*?@/', '@', $value);
 
         return '
             <a href="' . $url . '" target="_blank">' . $value . '</a>
@@ -62,7 +62,7 @@ class ContactExtension extends AbstractExtension
             return '';
         }
         $url = $value;
-        $value = preg_replace('/^@/', '', $value);
+        $value = preg_replace('/.*?@/', '@', $value);
 
         return '
             <a href="' . $url . '" target="_blank">' . $value . '</a>
