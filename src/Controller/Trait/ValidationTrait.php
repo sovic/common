@@ -55,6 +55,7 @@ trait ValidationTrait
             $contact->getTypeId() === ContactTypeId::Instagram ||
             $contact->getTypeId() === ContactTypeId::Threads
         ) {
+            $contact->setValue(trim($contact->getValue(), ' /'));
             if (str_starts_with($contact->getValue(), 'www.')) {
                 $contact->setValue('https://' . $contact->getValue());
             }

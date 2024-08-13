@@ -48,7 +48,8 @@ class ContactExtension extends AbstractExtension
             return '';
         }
         $url = $value;
-        $value = preg_replace('/.*?instagram\.com/', '', $value);
+        $value = trim($value, ' /');
+        $value = preg_replace('/.*?instagram\.com\//', '', $value);
 
         return '
             <a href="' . $url . '" target="_blank">' . $value . '</a>
@@ -62,6 +63,7 @@ class ContactExtension extends AbstractExtension
             return '';
         }
         $url = $value;
+        $value = trim($value, ' /');
         $value = preg_replace('/.*?@/', '@', $value);
 
         return '
