@@ -35,7 +35,7 @@ abstract class AbstractSearchRequestFactory
             $searchRequest->setSort($sort);
         }
 
-        $sortOrder = $request->query->get('asc');
+        $sortOrder = $request->query->get('order');
         if (in_array($sortOrder, ['asc', 'desc'], true)) {
             $searchRequest->setSortOrder($sortOrder);
         }

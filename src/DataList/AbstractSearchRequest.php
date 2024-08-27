@@ -90,9 +90,9 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     public function toArray(): array
     {
         return [
-            'asc' => $this->getSortOrder() ?? '',
             'limit' => $this->getLimit(),
             'page' => $this->getPage(),
+            'order' => $this->getSortOrder() ?? '',
             'search' => $this->getSearch() ?? '',
             'sort' => $this->getSort() ?? '',
             'visibility' => $this->getVisibilityId()->value,
