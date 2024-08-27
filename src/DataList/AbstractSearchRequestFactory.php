@@ -29,5 +29,15 @@ abstract class AbstractSearchRequestFactory
         $search = $request->query->get('search');
         $search = $search ? trim($search) : null;
         $searchRequest->setSearch($search);
+
+        $sort = $request->query->get('sort');
+        if ($sort && in_array($sort, $searchRequest->getSortOptions(), true)) {
+            $searchRequest->setSort($sort);
+        }
+
+        $sortOrder = $request->query->get('asc');
+        if (in_array($sortOrder, ['asc', 'desc'], true)) {
+            $searchRequest->setSortOrder($sortOrder);
+        }
     }
 }

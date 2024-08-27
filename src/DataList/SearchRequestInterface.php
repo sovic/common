@@ -13,4 +13,6 @@ interface SearchRequestInterface
     public function getSearch(): ?string;
 
     public function getVisibilityId(): VisibilityId;
+
+    public function getSortOptions(): array;
 }

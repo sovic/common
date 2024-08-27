@@ -13,6 +13,8 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     private int $page = 1;
     private ?string $search = null;
     private VisibilityId $visibilityId = VisibilityId::Public;
+    private ?string $sort = null;
+    private ?string $sortOrder = null;
 
     public function getLimit(): int
     {
@@ -59,12 +61,40 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         return new Pagination($total, $this->getLimit(), $this->getPage());
     }
 
+    public function getSortOptions(): array
+    {
+        return [];
+    }
+
+    public function getSort(): ?string
+    {
+        return $this->sort;
+    }
+
+    public function setSort(?string $sort): void
+    {
+        $this->sort = $sort;
+    }
+
+    public function getSortOrder(): ?string
+    {
+        return $this->sortOrder;
+    }
+
+    public function setSortOrder(?string $sortOrder): void
+    {
+        $this->sortOrder = $sortOrder;
+    }
+
+
     public function toArray(): array
     {
         return [
+            'asc' => $this->getSortOrder() ?? '',
             'limit' => $this->getLimit(),
             'page' => $this->getPage(),
             'search' => $this->getSearch() ?? '',
+            'sort' => $this->getSort() ?? '',
             'visibility' => $this->getVisibilityId()->value,
         ];
     }
