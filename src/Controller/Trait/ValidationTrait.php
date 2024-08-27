@@ -3,7 +3,6 @@
 namespace Sovic\Common\Controller\Trait;
 
 use libphonenumber\PhoneNumberUtil;
-use Sovic\Common\Entity\AddressEntityInterface;
 use Sovic\Common\Entity\ContactItemInterface;
 use Sovic\Common\Enum\ContactTypeId;
 use Sovic\Common\Validator\EmailValidator;
@@ -14,8 +13,7 @@ use Symfony\Component\Validator\Validation;
 trait ValidationTrait
 {
     // This method is used to validate the contact item.
-    // AddressEntityInterface is used to better parse contact items based on national customs.
-    public function validateContactItem(ContactItemInterface $contact, ?AddressEntityInterface $address = null): array
+    public function validateContactItem(ContactItemInterface $contact): array
     {
         $errors = [];
         if (($contact->getTypeId() === ContactTypeId::Email)
@@ -28,8 +26,8 @@ trait ValidationTrait
                 'phone' => $contact->getValue(),
                 'country' => 'CZ',
             ];
-            if ($address) {
-                $value['country'] = $address->getCountry()->value;
+            if ($contact->getCountry()) {
+                $value['country'] = $contact->getCountry()->value;
             }
 
             $validator = Validation::createValidator();

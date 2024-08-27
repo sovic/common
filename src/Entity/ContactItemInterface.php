@@ -3,6 +3,7 @@
 namespace Sovic\Common\Entity;
 
 use Sovic\Common\Enum\ContactTypeId;
+use Sovic\Common\Enum\CountryId;
 
 interface ContactItemInterface
 {
@@ -15,4 +16,6 @@ interface ContactItemInterface
     public function setValue(string $value): void;
 
     public function getNote(): ?string;
+
+    public function getCountry(): ?CountryId;
 }
