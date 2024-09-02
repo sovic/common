@@ -48,22 +48,18 @@ class AddressExtension extends AbstractExtension
         if ($address->getCityPart()) {
             $city .= ' (' . $address->getCityPart() . ')';
         }
-        if ($address->getZipCode() || $address->getCountry()) {
+        if ($address->getZipCode()) {
+            $zipCode = $address->getZipCode();
+            $join = $html ? '&nbsp;' : ' ';
+            $city = substr($zipCode, 0, 3) . $join . substr($zipCode, 3, 2) . ' ' . $city;
+        }
+        if ($address->getCountry()) {
             if ($html) {
                 $city .= '<br>';
             } else {
                 $city .= ', ';
             }
-        }
-        if ($address->getZipCode()) {
-            $zipCode = $address->getZipCode();
-            $join = $html ? '&nbsp;' : ' ';
-            $city .= substr($zipCode, 0, 3) . $join . substr($zipCode, 3, 2);
-            if ($address->getCountry()) {
-                $city .= ', ' . $address->getCountry()->value;
-            }
-        } elseif ($address->getCountry()) {
-            $city .= $address->getCountry()->value;
+            $city .= $address->getCountry()->trans();
         }
 
         return $city;
