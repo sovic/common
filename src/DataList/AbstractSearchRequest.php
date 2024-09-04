@@ -2,6 +2,7 @@
 
 namespace Sovic\Common\DataList;
 
+use Sovic\Common\DataList\Enum\LayoutId;
 use Sovic\Common\DataList\Enum\VisibilityId;
 use Sovic\Common\Pagination\Pagination;
 
@@ -15,6 +16,7 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     private VisibilityId $visibilityId = VisibilityId::Public;
     private ?string $sort = null;
     private ?string $sortOrder = null;
+    private ?LayoutId $layoutId = null;
 
     public function getLimit(): int
     {
@@ -86,13 +88,23 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         $this->sortOrder = $sortOrder;
     }
 
+    public function getLayoutId(): ?LayoutId
+    {
+        return $this->layoutId;
+    }
+
+    public function setLayoutId(?LayoutId $layoutId): void
+    {
+        $this->layoutId = $layoutId;
+    }
 
     public function toArray(): array
     {
         return [
+            'layout' => $this->getLayoutId()->value ?? '',
             'limit' => $this->getLimit(),
-            'page' => $this->getPage(),
             'order' => $this->getSortOrder() ?? '',
+            'page' => $this->getPage(),
             'search' => $this->getSearch() ?? '',
             'sort' => $this->getSort() ?? '',
             'visibility' => $this->getVisibilityId()->value,
