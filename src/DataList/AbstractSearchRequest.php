@@ -9,6 +9,7 @@ use Sovic\Common\Pagination\Pagination;
 abstract class AbstractSearchRequest implements SearchRequestInterface
 {
     public const HARD_LIMIT = 100;
+    public const RESULT_WINDOW = 100000; // TODO project config
 
     private int $limit = 25;
     private int $page = 1;
@@ -25,6 +26,12 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
 
     public function setLimit(int $limit): void
     {
+        if ($limit < 1) {
+            $limit = 1;
+        }
+        if ($limit > self::HARD_LIMIT) {
+            $limit = self::HARD_LIMIT;
+        }
         $this->limit = $limit;
     }
 
@@ -35,6 +42,13 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
 
     public function setPage(int $page): void
     {
+        if ($page < 1) {
+            $page = 1;
+        }
+        $maxPage = (int) ceil(self::RESULT_WINDOW / $this->getLimit());
+        if ($page > $maxPage) {
+            $page = $maxPage;
+        }
         $this->page = $page;
     }
 
