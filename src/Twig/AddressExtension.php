@@ -3,6 +3,7 @@
 namespace Sovic\Common\Twig;
 
 use Sovic\Common\Entity\AddressEntityInterface;
+use Sovic\Common\Helpers\Address;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -19,52 +20,12 @@ class AddressExtension extends AbstractExtension
 
     public function formatStreet(?AddressEntityInterface $address): string
     {
-        if (!$address) {
-            return '';
-        }
-
-        $street = $address->getStreet();
-        if ($address->getDescriptiveNumber()) {
-            $street .= ' ' . $address->getDescriptiveNumber();
-        }
-        if ($address->getOrientationNumber()) {
-            if ($address->getDescriptiveNumber()) {
-                $street .= '/';
-            } else {
-                $street .= ' ';
-            }
-
-            $street .= $address->getOrientationNumber();
-        }
-
-        return $street;
+        return Address::formatStreet($address);
     }
 
     public function formatCity(?AddressEntityInterface $address, bool $html = true): string
     {
-        if (!$address) {
-            return '';
-        }
-
-        $city = $address->getCity();
-        if ($address->getCityPart()) {
-            $city .= ' (' . $address->getCityPart() . ')';
-        }
-        if ($address->getZipCode()) {
-            $zipCode = $address->getZipCode();
-            $join = $html ? '&nbsp;' : ' ';
-            $city = substr($zipCode, 0, 3) . $join . substr($zipCode, 3, 2) . ' ' . $city;
-        }
-        if ($address->getCountry()) {
-            if ($html) {
-                $city .= '<br>';
-            } else {
-                $city .= ', ';
-            }
-            $city .= $address->getCountry()->trans();
-        }
-
-        return $city;
+        return Address::formatCity($address, $html);
     }
 
     public function formatAddress(?AddressEntityInterface $address, bool $html = true): string
