@@ -8,7 +8,7 @@ use Sovic\Common\Pagination\Pagination;
 
 abstract class AbstractSearchRequest implements SearchRequestInterface
 {
-    public const HARD_LIMIT = 100;
+    public const HARD_LIMIT = 1000;
     public const RESULT_WINDOW = 100000; // TODO project config
 
     private int $limit = 25;
