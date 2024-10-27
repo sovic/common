@@ -28,6 +28,7 @@ class Date
             $formatter->setPattern('LLLL y');
             $res[$i]['title'] = $formatter->format($date);
 
+            /** @noinspection PhpUnhandledExceptionInspection */
             $date->modify('-1 month');
         }
 
