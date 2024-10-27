@@ -16,6 +16,7 @@ enum ContactTypeId: string implements SimpleTranslatableEnumInterface
     case Facebook = 'facebook';
     case Instagram = 'instagram';
     case Threads = 'threads';
+    case Twitter = 'twitter';
 
     public function trans(): string
     {
@@ -29,6 +30,7 @@ enum ContactTypeId: string implements SimpleTranslatableEnumInterface
             self::Facebook => 'Facebook',
             self::Instagram => 'Instagram',
             self::Threads => 'Threads',
+            self::Twitter => 'X',
         };
     }
 
@@ -39,6 +41,7 @@ enum ContactTypeId: string implements SimpleTranslatableEnumInterface
             self::Facebook => ['www.facebook.com', 'facebook.com'],
             self::Instagram => ['www.instagram.com', 'instagram.com'],
             self::Threads => ['www.threads.net', 'threads.net'],
+            self::Twitter => ['www.twitter.com', 'twitter.com'],
         };
     }
 }
