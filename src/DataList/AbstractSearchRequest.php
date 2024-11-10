@@ -130,4 +130,14 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
             'visibility' => $this->getVisibilityId()->value,
         ];
     }
+
+    public function getPaginationRoute(): ?string
+    {
+        return $this->paginationRoute;
+    }
+
+    public function setPaginationRoute(?string $paginationRoute): void
+    {
+        $this->paginationRoute = $paginationRoute;
+    }
 }
