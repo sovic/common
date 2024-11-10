@@ -7,11 +7,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractSearchRequestFactory
 {
+    protected function getDefaultLimit(): int
+    {
+        return 25;
+    }
+
     public function loadDefaultSearchRequest(Request $request, SearchRequestInterface $searchRequest): void
     {
         $limit = (int) $request->query->get('limit', 25);
         if (!in_array($limit, [25, 50, 100])) {
-            $limit = 25;
+            $limit = $this->getDefaultLimit();
         }
         $searchRequest->setLimit($limit);
 
