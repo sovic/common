@@ -19,6 +19,7 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     private ?string $sortOrder = null;
     private ?LayoutId $layoutId = null;
     private ?string $paginationRoute = null;
+    private array $paginationRouteParams = [];
 
     public function getLimit(): int
     {
@@ -78,6 +79,7 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         $pagination = new Pagination($total, $this->getLimit(), $this->getPage());
         if ($this->paginationRoute) {
             $pagination->setRoute($this->paginationRoute);
+            $pagination->setRouteParams($this->paginationRouteParams);
         }
 
         return $pagination;
@@ -131,13 +133,13 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         ];
     }
 
-    public function getPaginationRoute(): ?string
-    {
-        return $this->paginationRoute;
-    }
-
     public function setPaginationRoute(?string $paginationRoute): void
     {
         $this->paginationRoute = $paginationRoute;
+    }
+
+    public function setPaginationRouteParams(array $paginationRouteParams): void
+    {
+        $this->paginationRouteParams = $paginationRouteParams;
     }
 }

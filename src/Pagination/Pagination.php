@@ -8,6 +8,7 @@ class Pagination
 {
     private string $basePath = '';
     private ?string $route = null;
+    private array $routeParams = [];
 
     public function __construct(
         private int $total,
@@ -82,5 +83,15 @@ class Pagination
     public function setRoute(?string $route): void
     {
         $this->route = $route;
+    }
+
+    public function getRouteParams(): array
+    {
+        return $this->routeParams;
+    }
+
+    public function setRouteParams(array $routeParams): void
+    {
+        $this->routeParams = $routeParams;
     }
 }
