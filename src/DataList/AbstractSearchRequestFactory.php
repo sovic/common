@@ -14,7 +14,7 @@ abstract class AbstractSearchRequestFactory
 
     public function loadDefaultSearchRequest(Request $request, SearchRequestInterface $searchRequest): void
     {
-        $limit = (int) $request->query->get('limit', 25);
+        $limit = (int) $request->query->get('limit', $this->getDefaultLimit());
         if (!in_array($limit, [25, 50, 100])) {
             $limit = $this->getDefaultLimit();
         }
