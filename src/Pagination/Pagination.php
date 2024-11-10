@@ -7,6 +7,7 @@ use InvalidArgumentException;
 class Pagination
 {
     private string $basePath = '';
+    private ?string $route = null;
 
     public function __construct(
         private int $total,
@@ -71,5 +72,15 @@ class Pagination
     public function setBasePath(string $basePath): void
     {
         $this->basePath = $basePath;
+    }
+
+    public function getRoute(): ?string
+    {
+        return $this->route;
+    }
+
+    public function setRoute(?string $route): void
+    {
+        $this->route = $route;
     }
 }
