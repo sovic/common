@@ -22,9 +22,15 @@ trait ValidationTrait
         }
 
         if ($contact->getTypeId() === ContactTypeId::Phone) {
+            if (!$contact->getCountry()) {
+                $errors[] = 'Je nutné vyplnit zemi';
+
+                return $errors;
+            }
+
             $value = [
                 'phone' => $contact->getValue(),
-                'country' => 'CZ',
+                'country' => $contact->getCountry(),
             ];
             if ($contact->getCountry()) {
                 $value['country'] = $contact->getCountry()->value;
