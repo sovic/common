@@ -133,13 +133,9 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         ];
     }
 
-    public function setPaginationRoute(?string $paginationRoute): void
+    public function setPaginationRoute(?string $routeName, array $params = []): void
     {
-        $this->paginationRoute = $paginationRoute;
-    }
-
-    public function setPaginationRouteParams(array $paginationRouteParams): void
-    {
-        $this->paginationRouteParams = $paginationRouteParams;
+        $this->paginationRoute = $routeName;
+        $this->paginationRouteParams = $params;
     }
 }
