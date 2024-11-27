@@ -6,13 +6,13 @@ use Sovic\Common\Entity\AddressEntityInterface;
 
 class Address
 {
-    public static function format(?AddressEntityInterface $address, string $separator = ', '): string
+    public static function format(?AddressEntityInterface $address, string $separator = ', ', bool $html = true): string
     {
         if (!$address) {
             return '';
         }
 
-        return self::formatStreet($address) . $separator . self::formatCity($address);
+        return self::formatStreet($address) . $separator . self::formatCity($address, $html);
     }
 
     public static function formatStreet(?AddressEntityInterface $address): string
