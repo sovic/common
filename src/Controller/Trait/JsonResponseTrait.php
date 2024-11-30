@@ -23,6 +23,8 @@ trait JsonResponseTrait
     }
 
     /**
+     * There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied
+     *
      * Implement https://github.com/omniti-labs/jsend
      */
     protected function sendFail(int $code = 400): JsonResponse
@@ -34,6 +36,8 @@ trait JsonResponseTrait
     }
 
     /**
+     * An error occurred in processing the request, i.e. an exception was thrown
+     *
      * Implement https://github.com/omniti-labs/jsend
      */
     protected function sendError(string $errorMessage, int $code = 500): JsonResponse
