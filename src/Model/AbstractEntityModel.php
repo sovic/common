@@ -53,6 +53,9 @@ abstract class AbstractEntityModel
     public function setOperator(mixed $operator): void
     {
         $this->operator = $operator;
+        if ($this->entity instanceof LoggableEntityInterface) {
+            $this->entity->setOperator($this->operator);
+        }
     }
 
     public function flush(): void
