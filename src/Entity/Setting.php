@@ -13,8 +13,9 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Sovic\Common\Enum\SettingTypeId;
+use Sovic\Common\Project\SettingGroupId;
 
-#[Table(name: 'setting')]
+#[Table(name: 'settings')]
 #[Index(columns: ['project_id'], name: 'project_id')]
 #[UniqueConstraint(name: 'project_group_key', columns: ['project_id', 'group', 'key'])]
 #[Entity]
@@ -26,11 +27,24 @@ class Setting
     protected int $id;
 
     #[ManyToOne(targetEntity: Project::class)]
-    #[JoinColumn(name: 'project_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    protected Project $project;
+    #[JoinColumn(
+        name: 'project_id',
+        referencedColumnName: 'id',
+        nullable: true,
+        onDelete: 'CASCADE',
+        options: ['default' => null]
+    )]
+    protected ?Project $project = null;
 
-    #[Column(name: '`group`', type: Types::STRING, length: 100, nullable: false)]
-    protected string $group;
+    #[Column(
+        name: '`group`',
+        type: Types::STRING,
+        length: 100,
+        nullable: false,
+        enumType: SettingGroupId::class,
+        options: ['default' => SettingGroupId::App]
+    )]
+    protected SettingGroupId $groupId;
 
     #[Column(name: '`key`', type: Types::STRING, length: 100, nullable: false)]
     protected string $key;
@@ -59,24 +73,24 @@ class Setting
         return $this->id;
     }
 
-    public function getProject(): Project
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    public function setProject(Project $project): void
+    public function setProject(?Project $project): void
     {
         $this->project = $project;
     }
 
-    public function getGroup(): string
+    public function getGroupId(): SettingGroupId
     {
-        return $this->group;
+        return $this->groupId;
     }
 
-    public function setGroup(string $group): void
+    public function setGroupId(SettingGroupId $groupId): void
     {
-        $this->group = $group;
+        $this->groupId = $groupId;
     }
 
     public function getKey(): string

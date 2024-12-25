@@ -34,9 +34,9 @@ class Project extends AbstractEntityModel
         $parameters = [];
         $templateKeys = [];
         foreach ($items as $item) {
-            $parameters[$item->getGroup() . '.' . $item->getKey()] = $item->getValue();
+            $parameters[$item->getGroupId()->value . '.' . $item->getKey()] = $item->getValue();
             if ($item->isTemplateEnabled()) {
-                $templateKeys[$item->getGroup() . '.' . $item->getKey()] = $item->getValue();
+                $templateKeys[$item->getGroupId() . '.' . $item->getKey()] = $item->getValue();
             }
         }
 
