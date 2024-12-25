@@ -54,4 +54,17 @@ final class ProjectFactory extends EntityModelFactory
 
         return null;
     }
+
+    public function createDefault(): Project
+    {
+        $name = $slug = 'app';
+        $domains = '';
+
+        $project = new ProjectEntity();
+        $project->setName($name);
+        $project->setSlug($slug);
+        $project->setDomains($domains);
+
+        return $this->loadByEntity($project);
+    }
 }
