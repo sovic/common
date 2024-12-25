@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpClassCanBeReadonlyInspection */
+<?php
 
 namespace Sovic\Common\Model;
 
