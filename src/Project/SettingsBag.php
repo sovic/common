@@ -4,7 +4,7 @@ namespace Sovic\Common\Project;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class ProjectSettings extends ParameterBag
+class SettingsBag extends ParameterBag
 {
     public array $templateKeys = [];
 

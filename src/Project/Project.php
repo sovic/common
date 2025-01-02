@@ -10,7 +10,7 @@ use Sovic\Common\Model\AbstractEntityModel;
  */
 class Project extends AbstractEntityModel
 {
-    private static ProjectSettings $settings;
+    private static SettingsBag $settings;
 
     public function getId(): int
     {
@@ -22,7 +22,7 @@ class Project extends AbstractEntityModel
         return $this->entity->getSlug();
     }
 
-    public function getSettings(): ProjectSettings
+    public function getSettings(): SettingsBag
     {
         if (isset(self::$settings)) {
             return self::$settings;
@@ -31,16 +31,9 @@ class Project extends AbstractEntityModel
         $items = $this->entityManager
             ->getRepository(Setting::class)
             ->findBy(['project' => $this->entity]);
-        $parameters = [];
-        $templateKeys = [];
-        foreach ($items as $item) {
-            $parameters[$item->getGroupId()->value . '.' . $item->getKey()] = $item->getValue();
-            if ($item->isTemplateEnabled()) {
-                $templateKeys[$item->getGroupId() . '.' . $item->getKey()] = $item->getValue();
-            }
-        }
+        $settings = Settings::parseSettings($items);
 
-        self::$settings = new ProjectSettings($parameters, $templateKeys);
+        self::$settings = new SettingsBag($settings['data'], $settings['template']);
 
         return self::$settings;
     }
