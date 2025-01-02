@@ -54,8 +54,9 @@ class Settings
         ];
         foreach ($items as $item) {
             $value = match ($item->getType()) {
-                SettingTypeId::Integer => (int) $item->getValue(),
+                SettingTypeId::Array => explode("\n", trim($item->getValue())),
                 SettingTypeId::Boolean => !empty($item->getValue()),
+                SettingTypeId::Integer => (int) $item->getValue(),
                 default => $item->getValue(),
             };
 
