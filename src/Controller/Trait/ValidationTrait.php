@@ -16,9 +16,11 @@ trait ValidationTrait
     public function validateContactItem(ContactItemInterface $contact): array
     {
         $errors = [];
-        if (($contact->getTypeId() === ContactTypeId::Email)
-            && EmailValidator::validate($contact->getValue()) !== true) {
-            $errors[] = 'Neplatný e-mail';
+        if ($contact->getTypeId() === ContactTypeId::Email) {
+            $contact->setValue(mb_strtolower($contact->getValue()));
+            if (EmailValidator::validate($contact->getValue()) !== true) {
+                $errors[] = 'Neplatný e-mail';
+            }
         }
 
         if ($contact->getTypeId() === ContactTypeId::Phone) {
