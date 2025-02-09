@@ -63,4 +63,12 @@ trait BaseControllerTrait
 
         return $this->render($template, $parameters, $response);
     }
+
+    protected function render500(string $template = 'page/500.html.twig', array $parameters = []): Response
+    {
+        $response = new Response();
+        $response->setStatusCode(500);
+
+        return $this->render($template, $parameters, $response);
+    }
 }
