@@ -44,20 +44,25 @@ class Address
             return '';
         }
 
-        $city = $address->getCity();
+        $city = $address->getCity() ?? '';
         if ($address->getCityPart()) {
             $city .= ' (' . $address->getCityPart() . ')';
         }
         if ($address->getZipCode()) {
             $zipCode = $address->getZipCode();
             $join = $html ? '&nbsp;' : ' ';
-            $city = substr($zipCode, 0, 3) . $join . substr($zipCode, 3, 2) . ' ' . $city;
+            $city = substr($zipCode, 0, 3)
+                . $join
+                . substr($zipCode, 3, 2)
+                . ($city ? (' ' . $city) : '');
         }
         if ($address->getCountry()) {
-            if ($html) {
-                $city .= '<br>';
-            } else {
-                $city .= ', ';
+            if (!empty($city)) {
+                if ($html) {
+                    $city .= '<br>';
+                } else {
+                    $city .= ', ';
+                }
             }
             $city .= $address->getCountry()->trans();
         }
