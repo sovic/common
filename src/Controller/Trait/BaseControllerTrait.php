@@ -26,6 +26,11 @@ trait BaseControllerTrait
         $this->locale = $locale;
     }
 
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
     protected function getRenderParameters(array $parameters = []): array
     {
         $locale = $this->locale;
