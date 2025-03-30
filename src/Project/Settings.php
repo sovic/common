@@ -16,14 +16,20 @@ class Settings
         private readonly CacheInterface         $cache,
         private readonly EntityManagerInterface $em,
         private readonly int                    $ttl = 3600,
+        private readonly ?Project               $project = null,
     ) {
         $settings = $this->cache->get('settings', function (ItemInterface $cacheItem) {
             $cacheItem->expiresAfter($this->ttl);
 
+            $criteria = [];
+            if ($this->project) {
+                $criteria['project'] = $this->project->entity;
+            }
+
             $items = $this->em
                 ->getRepository(Setting::class)
                 ->findBy(
-                    [],
+                    $criteria,
                     ['groupId' => 'ASC', 'key' => 'ASC']
                 );
 
