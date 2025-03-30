@@ -49,6 +49,11 @@ class Settings
         return $this->settings->get($group . '.' . $key, $default);
     }
 
+    public function getTemplateData(): array
+    {
+        return $this->settings->getTemplateData();
+    }
+
     /**
      * @param Setting[] $items
      */

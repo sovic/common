@@ -21,7 +21,8 @@ trait BaseControllerTrait
         }
     }
 
-    protected function setLocale(string $locale): void
+    // must be public for Symfony DI
+    public function setLocale(string $locale): void
     {
         $this->locale = $locale;
     }
