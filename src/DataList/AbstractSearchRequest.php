@@ -8,10 +8,11 @@ use Sovic\Common\Pagination\Pagination;
 
 abstract class AbstractSearchRequest implements SearchRequestInterface
 {
-    public const HARD_LIMIT = 1000;
-    public const RESULT_WINDOW = 100000; // TODO project config
+    public const DefaultLimit = 25;
+    public const HardLimit = 1000;
+    public const ResultWindow = 100000; // TODO project config
 
-    private int $limit = 25;
+    private int $limit = self::DefaultLimit;
     private int $page = 1;
     private ?string $search = null;
     private VisibilityId $visibilityId = VisibilityId::Public;
@@ -29,10 +30,10 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     public function setLimit(int $limit): void
     {
         if ($limit < 1) {
-            $limit = 1;
+            $limit = self::DefaultLimit;
         }
-        if ($limit > self::HARD_LIMIT) {
-            $limit = self::HARD_LIMIT;
+        if ($limit > self::HardLimit) {
+            $limit = self::HardLimit;
         }
         $this->limit = $limit;
     }
@@ -47,7 +48,7 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         if ($page < 1) {
             $page = 1;
         }
-        $maxPage = (int) ceil(self::RESULT_WINDOW / $this->getLimit());
+        $maxPage = (int) ceil(self::ResultWindow / $this->getLimit());
         if ($page > $maxPage) {
             $page = $maxPage;
         }
