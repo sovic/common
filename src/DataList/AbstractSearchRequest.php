@@ -12,7 +12,7 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     public const HardLimit = 1000;
     public const ResultWindow = 100000; // TODO project config
 
-    private int $limit = self::DefaultLimit;
+    private int $limit;
     private int $page = 1;
     private ?string $search = null;
     private VisibilityId $visibilityId = VisibilityId::Public;
@@ -22,15 +22,24 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
     private ?string $paginationRoute = null;
     private array $paginationRouteParams = [];
 
+    protected function getDefaultLimit(): int
+    {
+        return self::DefaultLimit;
+    }
+
     public function getLimit(): int
     {
+        if (!isset($this->limit)) {
+            $this->limit = $this->getDefaultLimit();
+        }
+
         return $this->limit;
     }
 
     public function setLimit(int $limit): void
     {
         if ($limit < 1) {
-            $limit = self::DefaultLimit;
+            $limit = $this->getDefaultLimit();
         }
         if ($limit > self::HardLimit) {
             $limit = self::HardLimit;
