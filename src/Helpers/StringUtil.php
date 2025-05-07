@@ -2,7 +2,7 @@
 
 namespace Sovic\Common\Helpers;
 
-class StringUtils
+class StringUtil
 {
     /** @noinspection PhpRedundantOptionalArgumentInspection */
     public static function fixUtf8(string $value): string
