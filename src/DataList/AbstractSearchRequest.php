@@ -107,6 +107,9 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
 
     public function setSort(?string $sort): void
     {
+        if ($sort && !in_array($sort, $this->getSortOptions(), true)) {
+            $sort = null;
+        }
         $this->sort = $sort;
     }
 
