@@ -12,10 +12,15 @@ abstract class AbstractSearchRequestFactory
         return 25;
     }
 
+    public function getAvailableLimits(): array
+    {
+        return [25, 50, 100];
+    }
+
     public function loadDefaultSearchRequest(Request $request, SearchRequestInterface $searchRequest): void
     {
         $limit = (int) $request->query->get('limit', $this->getDefaultLimit());
-        if (!in_array($limit, [25, 50, 100])) {
+        if (!in_array($limit, $this->getAvailableLimits())) {
             $limit = $this->getDefaultLimit();
         }
         $searchRequest->setLimit($limit);
