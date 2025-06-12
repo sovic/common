@@ -11,6 +11,15 @@ trait JsonResponseTrait
 {
     protected array $data = [];
 
+    protected function addError(string $error): void
+    {
+        if (!isset($this->data['errors'])) {
+            $this->data['errors'] = [];
+        }
+
+        $this->data['errors'][] = $error;
+    }
+
     /**
      * Implement https://github.com/omniti-labs/jsend
      */
@@ -36,7 +45,7 @@ trait JsonResponseTrait
     }
 
     /**
-     * An error occurred in processing the request, i.e. an exception was thrown
+     * An error occurred in processing the request, i.e., an exception was thrown
      *
      * Implement https://github.com/omniti-labs/jsend
      */
