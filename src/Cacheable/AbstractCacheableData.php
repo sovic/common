@@ -69,6 +69,7 @@ abstract class AbstractCacheableData
 
     public function warmUp(): void
     {
+        $this->cache->delete($this->getCacheKey());
         $this->getData();
     }
 }
