@@ -51,9 +51,9 @@ class Address
         if ($address->getZipCode()) {
             $zipCode = $address->getZipCode();
             $join = $html ? '&nbsp;' : ' ';
-            $city = substr($zipCode, 0, 3)
+            $city = mb_substr($zipCode, 0, 3)
                 . $join
-                . substr($zipCode, 3, 2)
+                . mb_substr($zipCode, 3, 2)
                 . ($city ? (' ' . $city) : '');
         }
         if ($address->getCountry()) {
