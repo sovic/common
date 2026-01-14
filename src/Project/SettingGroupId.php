@@ -4,6 +4,7 @@ namespace Sovic\Common\Project;
 
 enum SettingGroupId: string
 {
+    case Api = 'api';
     case App = 'app';
     case External = 'external';
     case Gallery = 'gallery';
@@ -15,6 +16,7 @@ enum SettingGroupId: string
     public function trans(): string
     {
         return match ($this) {
+            self::Api => 'API',
             self::App => 'Aplikace',
             self::External => 'Externí služby',
             self::Gallery => 'Galerie',
