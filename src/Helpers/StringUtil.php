@@ -54,7 +54,7 @@ class StringUtil
         $result = str_replace($a, $b, $value);
         $len = strlen($result);
         for ($i = 0; $i < $len; $i++) {
-            if (in_array($result[$i], $b) !== true && $replacement) {
+            if ($replacement && in_array($result[$i], $b, true) !== true) {
                 $result[$i] = $replacement;
             }
         }

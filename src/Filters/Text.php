@@ -75,7 +75,7 @@ class Text
 
         $searchRegex = '/ ([' . implode('|', $search) . ']) /';
 
-        return trim((string) preg_replace($searchRegex, ' $1&nbsp;', $text));
+        return trim(preg_replace($searchRegex, ' $1&nbsp;', $text));
     }
 
     /** @noinspection PhpRedundantOptionalArgumentInspection */

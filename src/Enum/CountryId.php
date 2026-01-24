@@ -522,7 +522,7 @@ enum CountryId: string implements SimpleTranslatableEnumInterface
         };
     }
 
-    public static function tryFromName(string $name): ?CountryId
+    public static function tryFromName(string $name): ?self
     {
         $name = trim($name);
 

@@ -16,14 +16,10 @@ class EmailValidator
             $email,
             [
                 new Length(
-                    [
-                        'min' => 3,
-                    ]
+                    min: 3
                 ),
                 new Email(
-                    [
-                        'mode' => Email::VALIDATION_MODE_STRICT,
-                    ]
+                    mode: Email::VALIDATION_MODE_STRICT
                 ),
             ]
         );

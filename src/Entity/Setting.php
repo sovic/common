@@ -16,7 +16,7 @@ use Sovic\Common\Enum\SettingTypeId;
 use Sovic\Common\Project\SettingGroupId;
 
 #[Table(name: 'settings')]
-#[Index(columns: ['project_id'], name: 'project_id')]
+#[Index(name: 'project_id', columns: ['project_id'])]
 #[UniqueConstraint(name: 'project_group_key', columns: ['project_id', 'group', 'key'])]
 #[Entity]
 class Setting

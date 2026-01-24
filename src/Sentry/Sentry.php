@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class Sentry
 {
@@ -63,7 +62,7 @@ class Sentry
             }
 
             // optionally alert someone about admin access attempt?
-            if ($className === AccessDeniedException::class || $className === AccessDeniedHttpException::class) {
+            if ($className === AccessDeniedHttpException::class) {
                 $report = false;
             }
 
