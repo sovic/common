@@ -18,4 +18,6 @@ interface ContactItemInterface
     public function getNote(): ?string;
 
     public function getCountry(): ?CountryId;
+
+    public function isFlagged(): bool;
 }
