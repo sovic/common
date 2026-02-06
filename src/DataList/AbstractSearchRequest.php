@@ -64,6 +64,15 @@ abstract class AbstractSearchRequest implements SearchRequestInterface
         $this->page = $page;
     }
 
+    public function getOffset(): int
+    {
+        if (!isset($this->page, $this->limit)) {
+            return 0;
+        }
+
+        return ($this->getPage() - 1) * $this->getLimit();
+    }
+
     public function getSearch(): ?string
     {
         return $this->search;
