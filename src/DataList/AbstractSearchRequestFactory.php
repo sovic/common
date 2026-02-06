@@ -17,6 +17,14 @@ abstract class AbstractSearchRequestFactory
         return [25, 50, 100];
     }
 
+    public function loadBasicSearchRequest(Request $request): BasicSearchRequest
+    {
+        $searchRequest = new BasicSearchRequest();
+        $this->loadDefaultSearchRequest($request, $searchRequest);
+
+        return $searchRequest;
+    }
+
     public function loadDefaultSearchRequest(Request $request, SearchRequestInterface $searchRequest): void
     {
         $limit = (int) $request->query->get('limit', $this->getDefaultLimit());
