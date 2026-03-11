@@ -13,7 +13,7 @@ final class IcoValidatorTest extends ConstraintValidatorTestCase
     #[DataProvider('provider')]
     public function testValidateIco(?string $value): void
     {
-        $constraint = new IcoConstraint('strict', 'myMessage');
+        $constraint = new IcoConstraint();
 
         $this->validator->validate($value, $constraint);
 

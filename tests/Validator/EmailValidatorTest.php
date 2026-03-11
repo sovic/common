@@ -8,6 +8,7 @@ use Sovic\Common\Validator\EmailValidator;
 
 final class EmailValidatorTest extends TestCase
 {
+    /** @noinspection SpellCheckingInspection */
     public static function emailProvider(): array
     {
         $data = [];

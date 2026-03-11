@@ -14,6 +14,7 @@ final class TextTest extends TestCase
         $this->assertSame($expected, Text::isUppercasePrevailing($value, $length));
     }
 
+    /** @noinspection SpellCheckingInspection */
     public static function provider(): array
     {
         return [
