@@ -56,4 +56,16 @@ trait JsonResponseTrait
             'message' => $errorMessage,
         ], $code);
     }
+
+    /**
+     * The request was valid, but the server is refusing to respond to it.
+     * Unlike a 403 Forbidden response, authenticating will make no difference.
+     */
+    protected function sendSkipped(): JsonResponse
+    {
+        return $this->json([
+            'status' => 'skipped',
+            'data' => null,
+        ]);
+    }
 }
