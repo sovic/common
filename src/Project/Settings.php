@@ -10,6 +10,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class Settings
 {
+    private string $cacheKey;
     private SettingsBag $settings;
 
     public function __construct(
@@ -18,11 +19,17 @@ class Settings
         private readonly int                    $ttl = 3600,
         private readonly ?Project               $project = null,
     ) {
-        $key = 'settings';
+        $this->cacheKey = 'settings';
         if ($this->project) {
-            $key .= '.' . $this->project->entity->getSlug();
+            $this->cacheKey .= '.' . $this->project->entity->getSlug();
         }
-        $settings = $this->cache->get($key, function (ItemInterface $cacheItem) {
+
+        $this->settings = $this->loadSettings();
+    }
+
+    private function loadSettings(): SettingsBag
+    {
+        $settings = $this->cache->get($this->cacheKey, function (ItemInterface $cacheItem) {
             $cacheItem->expiresAfter($this->ttl);
 
             $criteria = [];
@@ -40,7 +47,13 @@ class Settings
             return self::parseSettings($items);
         });
 
-        $this->settings = new SettingsBag($settings['data'], $settings['template']);
+        return new SettingsBag($settings['data'], $settings['template']);
+    }
+
+    public function invalidate(): void
+    {
+        $this->cache->delete($this->cacheKey);
+        $this->settings = $this->loadSettings();
     }
 
     public function all(): array
