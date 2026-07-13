@@ -27,4 +27,10 @@ class EmailValidator
 
         return $valid ?: $violations;
     }
+
+    // Restrict to ASCII characters only
+    public static function isAscii(string $email): bool
+    {
+        return !preg_match('/[^\x00-\x7F]/', $email);
+    }
 }
